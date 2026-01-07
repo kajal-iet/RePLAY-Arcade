@@ -37,3 +37,13 @@ def make_guess(data: GuessRequest):
         "clue": "🎉 You got it!" if clue == "WIN" else clue,
         "win": clue == "WIN"
     }
+
+
+class SandboxRequest(BaseModel):
+    code: str
+    payload: dict
+
+@router.post("/sandbox")
+def sandbox_run(data: SandboxRequest):
+    from .sandbox import run
+    return run(data.code, data.payload)
