@@ -1,39 +1,32 @@
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, Request
 from .logic import generate_secret_number, get_clues
 
-router = APIRouter(prefix="/bagels")
-
-class StartRequest(BaseModel):
-    level: str
-
-class GuessRequest(BaseModel):
-    guess: str
-    secret: str
-    num_digits: int
-
-LEVELS = {
-    "Easy":   (3, 10, 1),
-    "Medium": (4, 15, 2),
-    "Hard":   (5, 20, 3)
-}
+router = APIRouter()
 
 @router.post("/start")
-def start_game(data: StartRequest):
-    digits, max_guesses, points = LEVELS[data.level]
-    secret = generate_secret_number(digits)
+async def start_game(request: Request, data: dict):
+    level = data["level"]
+    sandbox = request.headers.get("X-SANDBOX") == "true"
+
+    secret = generate_secret_number(level)
 
     return {
         "secret": secret,
-        "num_digits": digits,
-        "max_guesses": max_guesses,
-        "points": points
+        "num_digits": len(secret),
+        "max_guesses": 10,
+        "points": 0
     }
 
 @router.post("/guess")
-def make_guess(data: GuessRequest):
-    clue = get_clues(data.guess, data.secret)
+async def submit_guess(request: Request, data: dict):
+    guess = data["guess"]
+    secret = data["secret"]
+
+    clue, win = get_clues(guess, secret)
+
     return {
-        "clue": "🎉 You got it!" if clue == "WIN" else clue,
-        "win": clue == "WIN"
+        "clue": clue,
+        "sample_clue": clue,
+        "win": win
     }
+
