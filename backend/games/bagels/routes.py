@@ -30,3 +30,15 @@ async def submit_guess(request: Request, data: dict):
         "win": win
     }
 
+<<<<<<< HEAD
+=======
+
+class SandboxRequest(BaseModel):
+    code: str
+    payload: dict
+
+@router.post("/sandbox")
+def sandbox_run(data: SandboxRequest):
+    from .sandbox import run
+    return run(data.code, data.payload)
+>>>>>>> 4c4587a870424882dd2f1cd710a0dc06fd13f11a
