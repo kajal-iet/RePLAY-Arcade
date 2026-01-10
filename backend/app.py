@@ -31,7 +31,7 @@ from games.hacking.routes import router as hacking_router
 from games.hangman.routes import router as hangman_router
 from games.pattern_carpet.routes import router as pattern_carpet_router
 from games.hourglass.routes import router as hourglass_router
-from games.robots.routes import router as robots_router
+# from games.robots.routes import router as robots_router
 from games.piglatin.routes import router as piglatin_router
 from sandbox.runner import sandbox_router
 
@@ -78,7 +78,7 @@ app.include_router(hacking_router)
 app.include_router(hangman_router)
 app.include_router(pattern_carpet_router)
 app.include_router(hourglass_router)
-app.include_router(robots_router)
+# app.include_router(robots_router)
 app.include_router(piglatin_router)
 app.include_router(sandbox_router)
 
