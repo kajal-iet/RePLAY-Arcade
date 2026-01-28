@@ -46,7 +46,6 @@ def english_to_pig_latin(sentence):
 
     return " ".join(output)
 
-
 class PigLatinGame:
     def __init__(self):
         self.reset()

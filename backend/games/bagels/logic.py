@@ -1,5 +1,6 @@
 import random
 
+
 def generate_secret_number(num_digits):
     numbers = list('0123456789')
     random.shuffle(numbers)
