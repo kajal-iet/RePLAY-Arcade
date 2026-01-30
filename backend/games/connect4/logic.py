@@ -34,3 +34,6 @@ def check_winner(t):
             if all(b[r+i][c+i]==t for i in range(4)): return True
             if all(b[r+3-i][c+i]==t for i in range(4)): return True
     return False
+
+def board_full():
+    return all(cell != EMPTY for row in GAME.board for cell in row)

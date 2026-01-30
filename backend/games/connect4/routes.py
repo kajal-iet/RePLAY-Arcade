@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from .logic import GAME, drop, check_winner, PLAYER_X, PLAYER_O
+from .logic import GAME, drop, check_winner, PLAYER_X, PLAYER_O, board_full
 
 router = APIRouter(prefix="/connect4")
 
@@ -22,8 +23,11 @@ def make_move(col: int):
 
     if check_winner(GAME.player):
         GAME.winner = GAME.player
+    elif board_full():
+        GAME.winner = "Draw"
     else:
         GAME.player = PLAYER_O if GAME.player == PLAYER_X else PLAYER_X
+
 
     return {"ok": True}
 
