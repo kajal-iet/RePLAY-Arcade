@@ -45,7 +45,7 @@ export default function Ducklings() {
   }, [density, speed, seasonal]);
 
   return (
-    <div className="game-shell theme-ducklings">
+    <div className=" theme-ducklings">
 
       <h2>🦆 Ducklings Parade</h2>
       <p className="subtitle">A calming ASCII animation playground</p>

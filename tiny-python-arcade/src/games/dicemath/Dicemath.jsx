@@ -54,10 +54,10 @@ export default function DiceMath() {
 
   if(!difficulty){
   return (
-    <div className="game-shell bitmap-game theme-dice dice-pro">
+    <div className=" bitmap-game theme-dice dice-pro">
 
-      <h2>🎲 Dice Math</h2>
-      <p className="subtitle">Add fast. Think faster.</p>
+      {/* <h2>🎲 Dice Math</h2> */}
+      <h2 className="subtitle">Add fast. Think faster.</h2>
 
       <div className="rules-card">
         <h3>📜 Rules</h3>
@@ -81,7 +81,7 @@ export default function DiceMath() {
 }
 
   return (
-    <div className="game-shell bitmap-game theme-dice">
+    <div className=" bitmap-game theme-dice">
 
       <h2>🎲 Dice Math</h2>
       <p>⏳ {timeLeft}s &nbsp; | &nbsp; 📊 Score: {score}</p>

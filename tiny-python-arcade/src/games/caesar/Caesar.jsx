@@ -21,10 +21,9 @@ export default function Caesar() {
   }
 
   return (
-    <div className="game-shell theme-caesar bitmap-game caesar-game">
+    <div className=" theme-caesar bitmap-game caesar-game">
 
-      <h2>🔐 Caesar Cipher</h2>
-      <p className="subtitle">Encrypt • Decrypt • Hacker Mode</p>
+      <h2 className="subtitle">Encrypt • Decrypt • Hacker Mode</h2>
 
       <div className="rules-card">
         <h3>📜 How it Works</h3>
@@ -36,7 +35,7 @@ export default function Caesar() {
         </ul>
       </div>
 
-      <div className="input-card">
+      {/* <div className="input-card"> */}
 
         <div className="input-group">
           <label>Mode</label>
@@ -60,7 +59,7 @@ export default function Caesar() {
         <div className="input-group">
           <label>Message</label>
           <textarea
-            rows="4"
+            rows="2"
             placeholder="Type your message here..."
             value={message}
             onChange={e => setMessage(e.target.value)}
@@ -75,7 +74,7 @@ export default function Caesar() {
           🛠️ Run Hacker Mode
         </button>
 
-      </div>
+      {/* </div> */}
 
       
 

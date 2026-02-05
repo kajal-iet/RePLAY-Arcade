@@ -21,7 +21,7 @@ export default function Factors() {
   }
 
   return (
-    <div className="game-shell aurora-factors">
+    <div className=" aurora-factors">
 
       <h2>🔢 Factor Finder</h2>
       <p className="subtitle">Instant Number Intelligence</p>

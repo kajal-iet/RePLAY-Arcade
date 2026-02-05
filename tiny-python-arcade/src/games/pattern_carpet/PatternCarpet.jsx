@@ -1,73 +1,112 @@
 import { useEffect, useState } from "react";
 import { getState, applyChanges, getImage } from "./carpet.api";
-// import "./pattern_carpet.css";
 
-export default function PatternCarpet() {
-  const [game, setGame] = useState(null);
-  const [local, setLocal] = useState({});
+export default function Carpet() {
+  const [state, setState] = useState(null);
+  const [pattern, setPattern] = useState("");
+  const [rows, setRows] = useState(4);
+  const [cols, setCols] = useState(6);
+  const [bg, setBg] = useState("#000000");
 
-  async function refresh() {
+  useEffect(() => {
+    load();
+  }, []);
+
+  async function load() {
     const data = await getState();
-    setGame(data);
-    setLocal(data);
+    setState(data);
+    setPattern(data.pattern);
+    setRows(data.y);
+    setCols(data.x);
+    setBg(data.bg);
   }
 
-  useEffect(() => { refresh(); }, []);
+  async function apply() {
+    await applyChanges({
+      pattern,
+      x: cols,
+      y: rows,
+      bg
+    });
+    load();
+  }
 
-  if (!game) return <h2 style={{textAlign:"center"}}>Loading…</h2>;
+  async function downloadImg() {
+    const blob = await getImage();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "pattern_carpet.png";
+    a.click();
+  }
+
+  if (!state) return null;
 
   return (
-    <div className="theme-carpet">
-      <h2>🧵 Pattern Carpet</h2>
+    <div className="game-shell theme-carpet">
+
+      {/* <h2>🧵 Pattern Carpet</h2> */}
+      <h2 className="subtitle">Build repeating ASCII carpets</h2>
 
       <div className="rules-card">
         <ul>
-          <li>Enter a base pattern</li>
-          <li>Select repeats and background color</li>
-          <li>Apply changes to update carpet</li>
-          <li>Download as text or image</li>
+          <li>Enter a base ASCII pattern</li>
+          <li>Rows = vertical repeats</li>
+          <li>Columns = horizontal repeats</li>
+          <li>Export carpet as an image</li>
         </ul>
       </div>
 
+      <label className="field-label">🧩 Base Pattern</label>
       <textarea
-        value={local.pattern}
-        onChange={e => setLocal({ ...local, pattern: e.target.value })}
+        value={pattern}
+        onChange={e => setPattern(e.target.value)}
+        className="carpet-textarea"
       />
 
       <div className="controls">
-        <input type="number" value={local.x} min="1" max="12"
-          onChange={e => setLocal({ ...local, x: +e.target.value })} />
-        <input type="number" value={local.y} min="1" max="12"
-          onChange={e => setLocal({ ...local, y: +e.target.value })} />
-        <input type="color" value={local.bg}
-          onChange={e => setLocal({ ...local, bg: e.target.value })} />
+        <div className="input-group">
+          <label>↕ Rows</label>
+          <input
+            type="number"
+            min="1"
+            value={rows}
+            onChange={e => setRows(+e.target.value)}
+          />
+        </div>
+
+        <div className="input-group">
+          <label>↔ Columns</label>
+          <input
+            type="number"
+            min="1"
+            value={cols}
+            onChange={e => setCols(+e.target.value)}
+          />
+        </div>
+
+        <div className="input-group">
+          <label>🎨 Background</label>
+          <input
+            type="color"
+            value={bg}
+            onChange={e => setBg(e.target.value)}
+          />
+        </div>
       </div>
 
-      <button onClick={() => applyChanges(local).then(refresh)}>
-        Apply Changes
+      <button onClick={apply}>✨ Apply Changes</button>
+      <button className="secondary-btn" onClick={downloadImg}>
+        ⬇ Download Image
       </button>
 
-      <pre className="preview" style={{background: game.bg}}>
-        {game.output}
-      </pre>
-
-      <div className="controls">
-        <button onClick={() => {
-          const blob = new Blob([game.output], { type: "text/plain" });
-          const url = URL.createObjectURL(blob);
-          window.open(url);
-        }}>
-          ⬇ Download Text
-        </button>
-
-        <button onClick={async () => {
-          const blob = await getImage();
-          const url = URL.createObjectURL(blob);
-          window.open(url);
-        }}>
-          🖼 Download Image
-        </button>
+      <div
+        className="carpet-preview"
+        style={{ background: bg }}
+      >
+        {state.preview}
       </div>
+
     </div>
   );
 }

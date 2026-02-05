@@ -28,7 +28,7 @@ export default function Clickbait() {
   }
 
   return (
-    <div className="game-shell bitmap-game theme-clickbait">
+    <div className=" bitmap-game theme-clickbait">
 
       <h2>📰 Clickbait Generator</h2>
       <p className="subtitle">Create outrageously fake headlines</p>
@@ -42,13 +42,13 @@ export default function Clickbait() {
         </ul>
       </div>
 
-      <div className="input-card">
-        <div className="input-group">
+      <div className="input-group">
+        <div>
           <label>Number of Headlines</label>
           <input type="number" min="1" value={count} onChange={e => setCount(+e.target.value)} />
         </div>
 
-        <div className="input-group">
+        <div>
         <label>Topic / Keyword</label>
         <input
             placeholder="e.g. AI, Fitness, Startups"

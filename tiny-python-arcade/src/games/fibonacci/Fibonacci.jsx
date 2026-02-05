@@ -19,7 +19,7 @@ export default function Fibonacci() {
   }
 
   return (
-    <div className="game-shell theme-fibonacci">
+    <div className=" theme-fibonacci">
 
       <h2>🌀 Fibonacci Generator</h2>
       <p className="subtitle">Visual Mathematics Playground</p>

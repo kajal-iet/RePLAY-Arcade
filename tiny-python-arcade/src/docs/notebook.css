@@ -1,0 +1,81 @@
+.notebook-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-bottom: 18px;
+  margin-top: 6px;
+}
+
+.notebook-nav button {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(99,102,241,.4);
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.notebook-nav button:hover {
+  transform: translateY(-2px);
+}
+
+.notebook-nav button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  font-weight: 600;
+  font-size: 14px;
+  color: #cbd5e1;
+  background: rgba(255,255,255,.06);
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+/* ======================================================
+   NOTEBOOK PAGE CARD
+====================================================== */
+
+.notebook-page {
+  background: linear-gradient(180deg, #111827, #0f172a);
+  border-radius: 18px;
+  padding: 24px 26px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.04);
+  animation: fadeIn .25s ease;
+  color:rgb(241, 245, 245);
+  height: 80vh;
+  
+  
+}
+
+.notebook-page h2 {
+  color: #a5b4fc;
+  margin-bottom: 12px;
+}
+
+.notebook-page pre {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+}
+
+/* ======================================================
+   SMOOTH PAGE TRANSITION
+====================================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -28,7 +28,7 @@ export default function chohan() {
   }
 
   return (
-    <div className="game-shell bitmap-game chohan-game theme-chohan">
+    <div className=" bitmap-game chohan-game theme-chohan">
 
       <h2>🎲 Cho-Han</h2>
       <p className="subtitle">Traditional Japanese Even-Odd Dice Game</p>

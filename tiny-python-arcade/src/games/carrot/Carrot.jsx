@@ -61,7 +61,7 @@ export default function Carrot() {
   }
 
   return (
-    <div className="game-shell bitmap-game carrot-game theme-carrot">
+    <div className=" bitmap-game carrot-game theme-carrot">
 
       <h2>🥕 Carrot Bluff</h2>
       <p className="subtitle">A social bluffing game</p>

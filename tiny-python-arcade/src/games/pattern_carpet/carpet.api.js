@@ -1,8 +1,7 @@
 const BASE = "http://localhost:8000/carpet";
 
 export async function getState() {
-  const r = await fetch(`${BASE}/state`);
-  return r.json();
+  return fetch(`${BASE}/state`).then(r => r.json());
 }
 
 export async function applyChanges(data) {
@@ -14,6 +13,5 @@ export async function applyChanges(data) {
 }
 
 export async function getImage() {
-  const r = await fetch(`${BASE}/image`);
-  return r.blob();
+  return fetch(`${BASE}/image`).then(r => r.blob());
 }

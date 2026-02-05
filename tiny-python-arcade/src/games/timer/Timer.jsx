@@ -66,7 +66,7 @@ export default function Timer() {
   const color = pct > 0.5 ? "green" : pct > 0.25 ? "orange" : "red";
 
   return (
-    <div className="game-shell bitmap-game theme-timer">
+    <div className=" bitmap-game theme-timer">
 
       <h2>⏱ Seven Segment Timer</h2>
 

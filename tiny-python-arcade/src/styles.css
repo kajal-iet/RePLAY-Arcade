@@ -7,6 +7,7 @@ body {
   max-width: 1100px;
   margin: auto;
   padding: 24px;
+  
 }
 
 .grid {
@@ -40,13 +41,14 @@ button {
 }
 
 .bagels {
-  max-width: 500px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
   padding: 20px;
   background: radial-gradient(circle at top, #e5f899, #678a0f);
-  border-radius: 18px;
-  color: white;
+  border-radius: 22px;
+  color: rgb(12, 11, 11);
   box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  height: 80vh;
 }
 
 .bagels h2 {
@@ -99,8 +101,9 @@ button {
 }
 
 .birthday-game {
-  max-width: 500px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 20px;
   background: radial-gradient(circle at top, #eeb2f3, #7c0f86);
   border-radius: 18px;
@@ -131,7 +134,7 @@ button {
 }
 
 .input-group input {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -162,10 +165,14 @@ button {
 }
 
 .result-card {
-  margin-top: 16px;
-  padding: 14px;
+  margin-top: 6px;
+  padding: 1px;
   border-radius: 14px;
   background: #f1f5f9;
+  color: #0f172a;
+  height:110px;
+  padding-left:6px;
+  padding-top:2px;
 }
 
 .stat {
@@ -261,8 +268,9 @@ button {
   font-weight: 600;
 }
 .bitmap-game {
-  max-width: 500px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 20px;
   background: radial-gradient(circle at top, #b2b4f3, #0a0668);
   border-radius: 18px;
@@ -294,8 +302,9 @@ button {
 }
 
 .blackjack-game {
-  max-width: 500px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 20px;
   background: radial-gradient(circle at top, #1ffabc, #02100d);
   border-radius: 18px;
@@ -366,8 +375,9 @@ button {
 /* ===================== DVD GAME THEME ===================== */
 
 .theme-dvd {
-  max-width: 520px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 22px;
   border-radius: 20px;
   background: radial-gradient(circle at top, #0ea5e9, #020617);
@@ -445,6 +455,7 @@ button {
   margin-top: 8px;
   max-height: 220px;
   overflow-y: auto;
+  color:#000
 }
 
 .hack-item {
@@ -464,8 +475,9 @@ button {
 ======================= */
 
 .theme-calendar {
-  max-width: 980px;
-  margin: 32px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 28px;
   border-radius: 22px;
   background: linear-gradient(180deg, #0f172a, #020617);
@@ -508,9 +520,9 @@ button {
 
 .day {
   background: linear-gradient(145deg, #f8fafc, #e5e7eb);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 12px;
-  min-height: 90px;
+  min-height: 30px;
   box-shadow: 0 6px 16px rgba(0,0,0,.08);
   display: flex;
   flex-direction: column;
@@ -578,30 +590,58 @@ button {
    CAESAR UI POLISH
 ========================== */
 
-.caesar-game {
-  animation: fadeIn .4s ease;
+.caesar-game .input-group {
+  background: rgba(255,255,255,0.06);
+  padding: 2px 12px;
+  border-radius: 12px;
+  margin-bottom: 2px;
+}
+
+.caesar-game label {
+  font-size: 13px;
+  opacity: .8;
+  margin-bottom: 3px;
 }
 
 .caesar-game textarea {
+  height: 20px;          /* smaller */
   resize: none;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 14px;
 }
+
+
+/* .caesar-game textarea {
+  resize: none;
+} */
 
 .caesar-output {
   margin-top: 16px;
-  animation: slideUp .35s ease;
+  padding: 12px;
+  border-radius: 12px;
+  background: #0f172a;
+  font-family: monospace;
+  font-size: 14px;
 }
 
+
 .caesar-hack-list {
-  margin-top: 14px;
+  margin-top: 16px;
+  max-height: 220px;      /* prevents infinite growth */
+  overflow-y: auto;
+  background: #0b1020;
   border-radius: 12px;
-  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  box-shadow: inset 0 0 12px rgba(0,0,0,.6);
 }
 
 .caesar-hack-item {
-  padding: 8px 10px;
-  border-radius: 8px;
-  transition: .2s ease;
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
 }
+
 
 .caesar-hack-item:hover {
   background: rgba(255,255,255,0.08);
@@ -619,19 +659,17 @@ button {
   to { opacity: 1; transform: translateY(0); }
 }
 /* Caesar Message Input Polish */
-.message-box textarea {
-  background: #f8fafc;
-  border: 1px solid #c7c7c7;
-  font-size: 15px;
-  line-height: 1.4;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,.08);
+.caesar-game button {
+  margin-top: 10px;
+  padding: 11px;
+  border-radius: 12px;
+  font-weight: 600;
 }
 
-.message-box textarea:focus {
-  outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99,102,241,.2);
+.caesar-game .secondary-btn {
+  margin-top: 8px;
 }
+
 /* Carrot Game UI */
 .carrot-game .score-box {
   display: flex;
@@ -758,6 +796,7 @@ button {
 .theme-collatz .rules-card {
   background: rgba(255,255,255,.85);
   border-left: 6px solid #0284c7;
+  color: #0f172a;
 }
 
 .sequence-box {
@@ -767,6 +806,7 @@ button {
   padding: 10px;
   border-radius: 10px;
   min-height: 80px;
+  color: #0f172a;
 }
 /* ==========================
    TIMER THEME
@@ -1036,7 +1076,6 @@ button {
 /* ==========================
    DUCKLINGS — MORNING PARK
 ========================== */
-
 .theme-ducklings {
   background: radial-gradient(circle at top, #fef9c3, #bae6fd);
   color: #1f2937;
@@ -1108,8 +1147,9 @@ button {
   margin-top: 14px;
 }
 .aurora-factors {
-  max-width: 680px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 26px;
   border-radius: 20px;
   background: radial-gradient(circle at top, #0f172a, #020617);
@@ -1183,8 +1223,9 @@ button {
 ========================= */
 
 .theme-fibonacci {
-  max-width: 860px;
-  margin: 32px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 30px;
   border-radius: 26px;
   background: linear-gradient(180deg, #ecfdf5, #d1fae5);
@@ -1205,7 +1246,6 @@ button {
 }
 
 /* Rules Card */
-
 .theme-fibonacci .rules-card {
   background: linear-gradient(135deg, #ffffff, #f0fdf4);
   color: #064e3b;
@@ -1304,8 +1344,9 @@ button {
 ========================= */
 
 .theme-fibonacci {
-  max-width: 860px;
-  margin: 32px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 30px;
   border-radius: 26px;
   background: linear-gradient(180deg, #ecfdf5, #d1fae5);
@@ -1326,7 +1367,6 @@ button {
 }
 
 /* Rules Card */
-
 .theme-fibonacci .rules-card {
   background: linear-gradient(135deg, #ffffff, #f0fdf4);
   color: #064e3b;
@@ -1426,8 +1466,9 @@ button {
 =========================== */
 
 .theme-fishtank {
-  max-width: 900px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 26px;
   border-radius: 22px;
   background: linear-gradient(180deg, #0f172a, #020617);
@@ -1521,8 +1562,9 @@ button {
 }
 
 .fastdraw-shell {
-  max-width: 520px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 32px;
   border-radius: 18px;
   background: linear-gradient(180deg, #2b1d0e, #3a260f);
@@ -1593,16 +1635,17 @@ button {
 }
 
 .flooder-shell {
-  max-width: 520px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 26px;
   border-radius: 18px;
-  background: linear-gradient(#0f172a, #020617);
+  background: linear-gradient(#a9c1f8, #021c8f);
   color: #e0f2fe;
   text-align: center;
 }
 
-.board { margin: 18px 0; }
+.board { margin: 18px 0; color:#000}
 
 .row { display: flex; }
 
@@ -1637,8 +1680,9 @@ button {
   font-weight: 600;
 }
 .connect4-shell {
-  max-width: 480px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 24px;
   border-radius: 16px;
   background: linear-gradient(#0f172a, #020617);
@@ -1667,7 +1711,7 @@ button {
 .cell.X { background: #ef4444; }
 .cell.O { background: #facc15; }
 .flooder-shell .rules-card {
-  background: rgba(30,41,59,.9);
+  background: rgba(87, 87, 249, 0.9);
   border-left: 6px solid #60a5fa;
   color: #e0f2fe;
 }
@@ -1675,6 +1719,7 @@ button {
 .flooder-shell .rules-card h3 {
   color: #93c5fd;
 }
+
 .fastdraw-shell .rules-card {
   background: rgba(255,210,77,.12);
   border-left: 6px solid #ffd24d;
@@ -1684,8 +1729,9 @@ button {
 .fastdraw-shell .rules-card h3 {
   color: #ffd24d;
 }
+
 .connect4-shell .rules-card {
-  background: rgba(30,41,59,.9);
+  background: rgba(197, 217, 249, 0.9);
   border-left: 6px solid #facc15;
   color: #dcdede;
 }
@@ -1693,6 +1739,7 @@ button {
 .connect4-shell .rules-card h3 {
   color: #fde047;
 }
+
 .theme-fishtank .rules-card {
   background: rgba(15,23,42,.9);
   border-left: 6px solid #38bdf8;
@@ -1702,9 +1749,11 @@ button {
 .theme-fishtank .rules-card h3 {
   color: #7dd3fc;
 }
+
 .theme-guess {
-  max-width: 520px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 28px;
   border-radius: 22px;
   background: radial-gradient(circle at top, #dcfce7, #22c55e);
@@ -1755,9 +1804,11 @@ select, input {
   background: #facc15;
   color: #064e3b;
 }
+
 .theme-gullible {
-  max-width: 520px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 28px;
   border-radius: 22px;
   background: radial-gradient(circle at top, #052e16, #022c22);
@@ -1782,8 +1833,6 @@ select, input {
   color: #d1fae5;
 }
 
-
-
 .warning {
   background: rgba(240,253,244,.12);
   margin-top: 10px;
@@ -1804,8 +1853,9 @@ select, input {
   color: #022c22;
 }
 .theme-hacking {
-  max-width: 720px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 28px;
   border-radius: 22px;
   background: radial-gradient(circle at top, #1f1147, #05010f);
@@ -1820,7 +1870,7 @@ select, input {
 
 /* Reuses your global .rules-card */
 .theme-hacking .rules-card {
-  background: rgba(233,213,255,.08);
+  background: rgba(219, 190, 251, 0.884);
   border-left: 6px solid #a855f7;
   margin-bottom: 16px;
 }
@@ -1881,8 +1931,9 @@ select, input {
 }
 
 .theme-hangman {
-  max-width: 520px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 24px;
   border-radius: 18px;
   background: linear-gradient(135deg,#1de931,#167825);
@@ -1971,51 +2022,110 @@ select, input {
 .guess-panel button:hover {
   transform: translateY(-1px);
 }
+/* =========================
+   PATTERN CARPET THEME
+========================= */
+/* =========================
+   PATTERN CARPET (VERTICAL)
+========================= */
+
 .theme-carpet {
-  max-width: 820px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 24px;
   border-radius: 18px;
-  background: linear-gradient(135deg,#0f766e,#020617);
+  background: linear-gradient(135deg, #0f766e, #020617);
   color: #ecfeff;
   box-shadow: 0 20px 50px rgba(0,0,0,.6);
 }
 
-textarea {
+.theme-carpet h2 {
+  text-align: center;
+}
+
+.theme-carpet .subtitle {
+  text-align: center;
+  opacity: .85;
+  margin-bottom: 12px;
+}
+
+
+/* Labels */
+.field-label {
+  font-weight: 700;
+  margin-top: 10px;
+  display: block;
+}
+/* Stack controls vertically */
+.theme-carpet .controls {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  margin: 6px 0;
+}
+
+/* Each field block */
+.theme-carpet .input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.theme-carpet .input-group label {
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #a7f3d0;
+}
+
+/* Inputs */
+.theme-carpet .input-group input {
   width: 100%;
-  height: 140px;
-  margin: 12px 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #022c22;
+  color: white;
+  font-size: 15px;
+}
+
+/* Color picker */
+.theme-carpet input[type="color"] {
+  height: 44px;
+  padding: 4px;
+}
+
+.carpet-textarea {
+  width: 30%;
+  height: 60px;
+  margin: 10px 0 14px;
   padding: 12px;
   border-radius: 12px;
   border: none;
   background: #022c22;
   color: #a7f3d0;
-  font-family: monospace;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
 }
 
-.preview {
+/* Preview */
+.carpet-preview {
   margin-top: 16px;
   padding: 16px;
   border-radius: 12px;
-  color: white;
-  font-family: monospace;
-  max-height: 280px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  white-space: pre;
+  max-height: 260px;
   overflow: auto;
+  box-shadow: inset 0 0 25px rgba(45,212,191,.35);
 }
 
-.controls {
-  display: flex;
-  gap: 12px;
-  margin: 12px 0;
-}
 
-.controls input,
-.controls button {
-  flex: 1;
-}
 .theme-hourglass {
-  max-width: 520px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 24px;
   border-radius: 18px;
   background: radial-gradient(circle at top, #fde68a, #92400e);
@@ -2050,8 +2160,9 @@ textarea {
   background: #facc15;
 }
 .theme-robots {
-  max-width: 520px;
-  margin: 40px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 24px;
   border-radius: 18px;
   background: radial-gradient(circle at top, #d8b4fe, #4c1d95);
@@ -2062,11 +2173,11 @@ textarea {
 
 .arena {
   background: #020617;
-  color: #e9d5ff;
   padding: 16px;
   border-radius: 14px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: monospace;
   margin: 14px 0;
+  white-space: pre;
 }
 
 .stats {
@@ -2082,20 +2193,13 @@ textarea {
   gap: 10px;
 }
 
-.controls button,
-.actions button {
+.controls button, .actions button {
   padding: 10px;
   border-radius: 10px;
   border: none;
   font-weight: 700;
   background: #a78bfa;
   color: #1e1b4b;
-  cursor: pointer;
-}
-
-.controls button:hover,
-.actions button:hover {
-  background: #c4b5fd;
 }
 
 .actions {
@@ -2108,9 +2212,30 @@ textarea {
   margin-top: 14px;
   font-weight: 800;
 }
+.theme-robots .rules-card {
+  background: rgba(255,255,255,.08);
+  border-left: 6px solid #a78bfa;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 14px 0 18px;
+  color: #e9d5ff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+.theme-robots .rules-card h3 {
+  margin-bottom: 6px;
+  color: #c4b5fd;
+}
+
+.theme-robots .rules-card li {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
 .theme-piglatin {
-  max-width: 520px;
-  margin: 30px auto;
+  width: 90%;
+  margin: 8px auto;
+  height: 80vh;
   padding: 24px;
   border-radius: 18px;
   background: linear-gradient(135deg,#7c3aed,#ec4899);
@@ -2123,6 +2248,7 @@ textarea {
   justify-content: space-between;
   font-weight: 700;
   margin-bottom: 10px;
+  color:#000;
 }
 
 .question {
@@ -2139,14 +2265,91 @@ textarea {
   border: none;
   margin-bottom: 10px;
 }
-.playground {
+/* ===== FULL SCREEN GAME LAYOUT ===== */
+.layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 80vh;
+  gap: 40px;
+  padding-top:-5px;
+  align-items: start;   /* keeps both panels same top level */
 }
 
-.playground textarea {
-  width: 100%;
-  height: 90%;
-  font-family: monospace;
+
+.left-panel,
+.right-panel {
+  padding: 30px 36px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep both panels visually aligned */
+.left-panel {
+  align-items: center;
+}
+
+/* VISUAL SEPARATION */
+.right-panel {
+  border-left: 2px solid rgba(255,255,255,0.06);
+}
+/* ===========================
+   GAME PAGE MAIN TITLE
+=========================== */
+
+.left-panel > h2 {
+  font-size: 36px;
+  text-align: center;
+  margin: 10px 0 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-top: 6px;
+
+  background: linear-gradient(90deg, #a5b4fc, #818cf8, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 0 8px rgba(99,102,241,.7),
+    0 0 18px rgba(99,102,241,.5);
+
+  animation: pageTitleGlow 2.5s ease-in-out infinite alternate;
+}
+
+/* subtitle under title */
+.left-panel > p {
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 22px;
+  font-size: 15px;
+}
+
+/* glow animation */
+@keyframes pageTitleGlow {
+  from {
+    text-shadow:
+      0 0 4px rgba(99,102,241,.4),
+      0 0 10px rgba(99,102,241,.3);
+  }
+  to {
+    text-shadow:
+      0 0 12px rgba(99,102,241,1),
+      0 0 28px rgba(99,102,241,.8);
+  }
+}
+.game-over-banner {
+  margin-top: -50px;
+  padding: 14px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #facc15, #f97316);
+  color: #111;
+  box-shadow: 0 10px 25px rgba(0,0,0,.4);
+  animation: popIn .4s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }

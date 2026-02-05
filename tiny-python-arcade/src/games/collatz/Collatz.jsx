@@ -57,11 +57,11 @@ export default function Collatz() {
   }
 
   return (
-    <div className="game-shell bitmap-game theme-timer timer-pro">
+    <div className=" bitmap-game theme-timer timer-pro">
 
 
-      <h2>🔢 Collatz Explorer</h2>
-      <p className="subtitle">Visualize the 3n + 1 sequence</p>
+      {/* <h2>🔢 Collatz Explorer</h2> */}
+      <h2 className="subtitle">Visualize the 3n + 1 sequence</h2>
        <div className="rules-card">
         <p>
             The <strong>Collatz sequence</strong> (also called the <em>3n + 1 problem</em>) works like this:
@@ -84,9 +84,9 @@ export default function Collatz() {
       </div>
 
       {mode === "single" && (
-        <div className="input-card">
+        <div>
 
-          <div className="input-group">
+          <div>
             <label>Start Number</label>
             <input
               type="number"

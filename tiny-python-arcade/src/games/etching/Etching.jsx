@@ -44,7 +44,7 @@ export default function Etching(){
   }
 
   return (
-    <div className="game-shell theme-etching">
+    <div className=" theme-etching">
 
       <h2>🖌 Etching Drawer</h2>
 

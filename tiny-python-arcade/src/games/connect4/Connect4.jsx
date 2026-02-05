@@ -36,7 +36,13 @@ export default function Connect4() {
               <div
                 key={c}
                 className={`cell ${cell}`}
-                onClick={() => { dropTile(c); refresh(); }}
+                onClick={() => {
+                  if (!game.winner) {
+                    dropTile(c);
+                    refresh();
+                  }
+                }}
+
               />
             ))}
           </div>
@@ -45,7 +51,14 @@ export default function Connect4() {
 
       <p>Turn: {game.player}</p>
 
-      {game.winner && <h3>Winner: {game.winner}</h3>}
+      {game.winner && (
+      <div className="game-over-banner">
+        {game.winner === "Draw"
+          ? "🤝 It's a Draw!"
+          : `🎉 Player ${game.winner} Wins!`}
+      </div>
+    )}
+
 
       <button onClick={() => { resetGame(); refresh(); }}>Restart</button>
     </div>

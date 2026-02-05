@@ -5,7 +5,7 @@ export default function Dvd() {
   const [hits, setHits] = useState(0);
   const [running, setRunning] = useState(false);
 
-  const WIDTH = 460;
+  const WIDTH = 750;
   const HEIGHT = 280;
   const SIZE = 60;
 
@@ -64,10 +64,10 @@ export default function Dvd() {
   }, [running]);
 
   return (
-    <div className="game-shell theme-dvd">
+    <div className=" theme-dvd">
 
-      <h2>💿 Bouncing DVD</h2>
-      <p className="subtitle">Legendary screen saver challenge</p>
+      {/* <h2>💿 Bouncing DVD</h2> */}
+      <h2 className="subtitle">Legendary screen saver challenge</h2>
 
       <div className="rules-card">
         <h3>📜 Rules</h3>

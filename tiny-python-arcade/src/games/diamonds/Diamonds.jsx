@@ -56,7 +56,7 @@ export default function Diamonds() {
   }
 
   return (
-    <div className="game-shell bitmap-game theme-diamond">
+    <div className=" bitmap-game theme-diamond">
 
       <h2>💎 Animated Diamonds</h2>
       <p className="subtitle">Create & animate ASCII diamonds</p>

@@ -15,7 +15,7 @@ export default function FishTank() {
   }, []);
 
   return (
-    <div className="game-shell theme-fishtank">
+    <div className=" theme-fishtank">
       <h2>🐠 Fish Tank</h2>
       <div className="rules-card">
         <h3>📜 How It Works</h3>

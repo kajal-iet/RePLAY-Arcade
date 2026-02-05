@@ -1,25 +1,7 @@
-import { useState, useEffect } from "react";
-import { startGame, submitMove } from "./bagels.sandbox";
+import { useState } from "react";
 import { startBagels, submitGuess } from "./bagels.api";
 
-
-export default function Bagels({ mode = "game", engine }) {
-
-  const [levels, setLevels] = useState(["Easy", "Medium", "Hard"]);
-  useEffect(() => {
-  if (mode === "playground" && engine) {
-    const engineLevels = Object.keys(engine.LEVELS);
-    setLevels(engineLevels);
-
-    // reset selected level if it no longer exists
-    if (!engineLevels.includes(level)) {
-      setLevel(engineLevels[0]);
-    }
-  }
-}, [engine, mode]);
-
-
-
+export default function Bagels() {
   const [level, setLevel] = useState("Easy");
   const [game, setGame] = useState(null);
   const [guess, setGuess] = useState("");
@@ -28,69 +10,44 @@ export default function Bagels({ mode = "game", engine }) {
   const [over, setOver] = useState(false);
   const [message, setMessage] = useState("");
 
-  async function startGameHandler() {
-  let data;
-
-  if (mode === "playground" && engine) {
-    const cfg = engine.LEVELS[level];
-    const secret = engine.generate_secret_number(cfg.digits);
-
-    data = {
-      secret,
-      num_digits: cfg.digits,
-      max_guesses: cfg.guesses,
-      points: cfg.points
-    };
-  } else {
-    data = await startBagels(level);
+  async function startGame() {
+    const data = await startBagels(level);
+    setGame(data);
+    setGuess("");
+    setHistory([]);
+    setMoves(0);
+    setOver(false);
+    setMessage("");
   }
 
-  setGame(data);
-  setGuess("");
-  setHistory([]);
-  setMoves(0);
-  setOver(false);
-  setMessage("");
-}
-
-
   async function handleSubmit() {
-  if (over || !game) return;
-  if (guess.length !== game.num_digits || !/^\d+$/.test(guess)) return;
+    if (over || guess.length !== game.num_digits || !/^\d+$/.test(guess)) return;
 
-  let res;
-
-  if (mode === "playground" && engine) {
-    const clue = engine.get_clues(guess, game.secret);
-    res = { clue, win: clue === "WIN" };
-  } else {
-    res = await submitGuess({
+    const res = await submitGuess({
       guess,
       secret: game.secret,
       num_digits: game.num_digits
     });
+
+    const newHistory = [{ guess, clue: res.clue }, ...history];
+    setHistory(newHistory);
+    setMoves(moves + 1);
+    setGuess("");
+
+    if (res.win) {
+      setMessage(`🎯 Correct! The number was ${game.secret}`);
+      setOver(true);
+    } else if (moves + 1 >= game.max_guesses) {
+      setMessage(`❌ Out of guesses! The number was ${game.secret}`);
+      setOver(true);
+    }
   }
-
-  const newHistory = [{ guess, clue: res.clue }, ...history];
-  setHistory(newHistory);
-  setMoves(moves + 1);
-  setGuess("");
-
-  if (res.win) {
-    setMessage(`🎯 Correct! The number was ${game.secret}`);
-    setOver(true);
-  } else if (moves + 1 >= game.max_guesses) {
-    setMessage(`❌ Out of guesses! The number was ${game.secret}`);
-    setOver(true);
-  }
-}
-
 
   return (
-    <div className="game-shell theme-bagels bagels">
+    <div className="bagels">
 
-      <h2>🧩 Bagels</h2>
-      <p className="subtitle">Crack the secret number</p>
+      {/* <h2>🧩 Bagels</h2> */}
+      <h2 className="subtitle">Crack the secret number</h2>
 
       <div className="rules-card">
         <h3>📜 Rules</h3>
@@ -105,13 +62,12 @@ export default function Bagels({ mode = "game", engine }) {
       {!game && (
         <>
           <select value={level} onChange={e => setLevel(e.target.value)}>
-            {levels.map(l => (
-              <option key={l} value={l}>{l}</option>
-            ))}
+            <option>Easy</option>
+            <option>Medium</option>
+            <option>Hard</option>
           </select>
 
-
-          <button className="start-btn" onClick={startGameHandler}>
+          <button className="start-btn" onClick={startGame}>
             ▶ Start Game
           </button>
         </>
@@ -123,8 +79,9 @@ export default function Bagels({ mode = "game", engine }) {
             <span>⏳ Remaining: {game.max_guesses - moves}</span>
             <span>🎯 Points: {game.points}</span>
           </div>
-
-          <input
+          
+          
+          <input 
             value={guess}
             maxLength={game.num_digits}
             placeholder={`Enter ${game.num_digits}-digit guess`}
@@ -147,7 +104,7 @@ export default function Bagels({ mode = "game", engine }) {
           </div>
 
           {over && (
-            <button onClick={startGameHandler}>
+            <button onClick={startGame}>
               🔁 Play Again
             </button>
           )}

@@ -30,7 +30,7 @@ export default function Blackjack() {
   return (
     <div className="blackjack-game">
 
-      <h2>🃏 Blackjack</h2>
+      <h2 className="subtitle">🃏 Blackjack</h2>
       <p className="subtitle">Try to beat the dealer without going over 21</p>
 
       <div className="rules-card">

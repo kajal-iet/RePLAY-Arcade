@@ -65,8 +65,8 @@ export default function Bitmap() {
   return (
     <div className="bitmap-game">
 
-      <h2>🗺️ Bitmap Message Generator</h2>
-      <p className="subtitle">Turn your text into glowing pixel art</p>
+      {/* <h2 className="subtitle">🗺️ Bitmap Message Generator</h2> */}
+      <h2 className="subtitle">Turn your text into glowing pixel art</h2>
 
       <div className="rules-card">
         <h3>📜 How It Works</h3>

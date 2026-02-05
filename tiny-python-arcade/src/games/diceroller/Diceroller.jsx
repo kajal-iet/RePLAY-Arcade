@@ -39,12 +39,12 @@ export default function DiceRoller() {
   }
 
   return (
-    <div className="game-shell bitmap-game theme-diceroller">
+    <div className=" bitmap-game theme-diceroller">
 
-      <h2>🎲 Dice Roller</h2>
-      <p className="subtitle">Supports 3d6, 1d100+5, 2d999-3, anything!</p>
+      {/* <h2>🎲 Dice Roller</h2> */}
+      <h2 className="subtitle">Supports 3d6, 1d100+5, 2d999-3, anything!</h2>
 
-      <div className="rules-card">
+      <div>
         <ul>
           <li>Type dice using RPG notation</li>
           <li>Supports any size: d17, d999, d10000</li>
@@ -64,14 +64,14 @@ export default function DiceRoller() {
       </div>
 
       {result && (
-        <div className="result-card">
+        <div>
           <p>🎯 Total: <b>{result.total}</b></p>
           <p>🎲 Rolls: {result.rolls.join(", ")}</p>
           {result.modifier !== 0 && <p>Modifier: {result.modifier}</p>}
         </div>
       )}
 
-      <div className="rules-card">
+      <div>
         <h3>🤖 Battle Mode</h3>
         <p>Round {round} / 5 — You {you} : {cpu} CPU</p>
         <button onClick={playBattle}>Play Round</button>

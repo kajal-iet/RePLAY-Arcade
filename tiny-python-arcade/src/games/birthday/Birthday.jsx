@@ -32,9 +32,10 @@ export default function Birthday() {
   }
 
   return (
-    <div className="game-shell theme-birthday birthday-game">
+    <div className=" theme-birthday birthday-game">
 
-      <h2>🎂 Birthday Paradox</h2>
+      <h2>Find probability of occurunce of your bday</h2>
+      
       <div className="rules-card">
   <h3>📜 How This Simulation Works</h3>
   <ul>

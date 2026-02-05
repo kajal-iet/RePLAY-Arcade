@@ -27,7 +27,7 @@ export default function Calendar() {
   }
 
   return (
-    <div className="game-shell theme-calendar">
+    <div className=" theme-calendar">
 
       <h2>📅 Smart Calendar</h2>
       <p className="subtitle">Plan your month with notes & reminders</p>

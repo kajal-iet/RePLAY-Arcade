@@ -68,7 +68,7 @@ export default function Matrix() {
   }
 
   return (
-    <div className="game-shell theme-matrix">
+    <div className=" theme-matrix">
 
       <h2>🟢 Matrix Rain</h2>
       <p className="subtitle">Classic hacker-style digital rain</p>
