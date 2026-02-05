@@ -1,0 +1,86 @@
+/* ===== Playground Layout ===== */
+
+.playground-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  height: calc(100vh - 60px);
+  gap: 16px;
+  padding: 16px;
+  background: #0f1220;
+}
+
+/* ===== Game Preview ===== */
+
+.game-preview {
+  background: linear-gradient(145deg, #15192f, #0b0e1a);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  display: flex;
+}
+
+.preview-frame {
+  flex: 1;
+  background: #0a0d18;
+  border-radius: 14px;
+  padding: 16px;
+  overflow: auto;
+}
+
+/* ===== Code Editor ===== */
+
+.code-editor {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #14182c, #0b0e1a);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  overflow: hidden;
+}
+
+/* Header */
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.03);
+  font-weight: 600;
+  color: #e5e7ff;
+  letter-spacing: .4px;
+}
+
+/* Textarea */
+
+.code-editor textarea {
+  flex: 1;
+  background: #0a0d18;
+  color: #e7e9ff;
+  border: none;
+  outline: none;
+  padding: 16px;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  resize: none;
+}
+
+/* ===== Run Button ===== */
+
+.editor-header button {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #5f7cff, #9b6bff);
+  color: white;
+  font-weight: 600;
+  transition: .25s ease;
+  box-shadow: 0 8px 20px rgba(130,120,255,.35);
+}
+
+.editor-header button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(130,120,255,.55);
+}
