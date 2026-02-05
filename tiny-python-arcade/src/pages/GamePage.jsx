@@ -20,7 +20,7 @@ import Ducklings from "../games/ducklings/Ducklings";
 import Etching from "../games/etching/Etching";
 import Factors from "../games/factors/Factors";
 import Fibonacci from "../games/fibonacci/Fibonacci";
-import FastDraw from "../games/fastdraw/Fastdraw";
+import FastDraw from "../games/fastdraw/FastDraw";
 import FishTank from "../games/fishtank/FishTank";
 import Flooder from "../games/flooder/Flooder";
 import Connect4 from "../games/connect4/Connect4"
