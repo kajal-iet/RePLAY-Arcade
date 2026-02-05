@@ -31,7 +31,7 @@ import Hangman from "../games/hangman/Hangman";
 import PatternCarpet from "../games/pattern_carpet/PatternCarpet";
 import Hourglass from "../games/hourglass/Hourglass";
 import HungryRobots from "../games/robots/Robots";
-import PigLatin from "../games/piglatin/piglatin";
+import PigLatin from "../games/piglatin/pigLatin";
 import DocNotebook from "../docs/DocNotebook";
 import { bagelsDocs } from "../docs/bagels/bagelsDocs";
 import { birthdayDocs } from "../docs/birthday/birthdayDocs";
