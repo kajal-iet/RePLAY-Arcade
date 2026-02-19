@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/birthday";
+const BASE = `${import.meta.env.VITE_API_URL}/birthday`;
 
 export async function runSimulation(people, simulations) {
   const res = await fetch(`${BASE}/simulate`, {
