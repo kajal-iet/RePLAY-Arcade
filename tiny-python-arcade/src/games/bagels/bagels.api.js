@@ -1,4 +1,4 @@
-const BASE = `${import.meta.env.VITE_API_URL}/bagels/start`;
+const BASE = `${import.meta.env.VITE_API_URL}/bagels`;
 
 export async function startBagels(level) {
   const res = await fetch(`${BASE}/start`, {
