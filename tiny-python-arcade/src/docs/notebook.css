@@ -54,7 +54,7 @@
   border: 1px solid rgba(255,255,255,.04);
   animation: fadeIn .25s ease;
   color:rgb(241, 245, 245);
-  max-height: 80vh;
+  max-height: 75vh;
   overflow-y: auto;
   
   
@@ -66,10 +66,12 @@
 }
 
 .notebook-page pre {
-  white-space: pre-wrap;
-  line-height: 1.7;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 14px;
+  white-space: pre-wrap;      /* allow wrapping */
+  word-wrap: break-word;      /* break long words */
+  overflow-wrap: break-word;  /* modern wrap support */
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: "Inter", sans-serif; /* optional cleaner font */
 }
 
 /* ======================================================
@@ -79,4 +81,9 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .notebook-page pre {
+    font-size: 14px;
+  }
 }

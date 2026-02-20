@@ -1,3 +1,5 @@
+
+console.log("API URL:", import.meta.env.VITE_API_URL);
 const BASE = `${import.meta.env.VITE_API_URL}/bagels`;
 
 export async function startBagels(level) {

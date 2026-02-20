@@ -28,11 +28,9 @@ export default function DocNotebook({ docs }) {
 
       {/* PAGE CONTENT */}
       <div className="notebook-page">
-      <h2>{docs[page].title}</h2>
-      <div className="doc-content">
-        {docs[page].content}
+        <h2>{docs[page].title}</h2>
+        <pre>{docs[page].content}</pre>
       </div>
-    </div>
     </div>
   );
 }
