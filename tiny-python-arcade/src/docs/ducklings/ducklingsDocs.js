@@ -70,10 +70,10 @@ If direction == RIGHT:
 Eye styles use dictionary lookup:
 
 eye_map = {
-  'beady': '"',
-  'wide': "''",
+  'beady': '•',
+  'wide': 'oo',
   'happy': '^^',
-  'aloof': '``'
+  'aloof': '--'
 }
 
 This demonstrates conditional formatting and symbol mapping.
