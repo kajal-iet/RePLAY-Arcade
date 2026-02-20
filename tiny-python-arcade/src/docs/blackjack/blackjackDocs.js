@@ -22,8 +22,7 @@ This implementation is backend-driven using Python and FastAPI. The server manag
 
   {
     title: "Deck Generation & Card Representation",
-    content: `
-Each card is represented as:
+    content: `Each card is represented as:
 (rank, suit)
 
 Ranks:

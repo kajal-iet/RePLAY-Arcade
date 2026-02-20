@@ -1,4 +1,4 @@
-export const diamondDocs = [
+export const diamondsDocs = [
   {
     title: "Problem Overview",
     content: `
