@@ -1,191 +1,157 @@
-export const hourglassDocs = [
+export const hangmanDocs = [
   {
     title: "Problem Overview",
     content: `
-The Hourglass module simulates falling sand particles inside a glass-shaped boundary.
+The Hangman module is a word-guessing game where the player attempts to reveal a hidden word one letter at a time.
 
-Grid dimensions:
-WIDTH = 30
-HEIGHT = 24
+The system:
+- Randomly selects a category.
+- Randomly selects a word from that category.
+- Tracks correct and missed guesses.
+- Displays progressive hangman ASCII art for each wrong guess.
+- Ends the game when the word is fully guessed or attempts are exhausted.
 
-Each cell may contain:
-SAND ("●")
-EMPTY (" ")
-WALL ("#")
-
-The simulation:
-- Creates hourglass walls procedurally.
-- Fills the upper chamber with sand.
-- Applies gravity rules per frame.
-- Allows sand to fall vertically or diagonally.
-- Continues until no particles move.
-
-This module demonstrates procedural geometry, gravity-based cellular automata, and particle simulation.
+This module demonstrates string membership checks, progressive failure visualization, state tracking, and win/loss evaluation.
 `
   },
 
   {
-    title: "Procedural Glass Boundary Generation",
+    title: "Game State Architecture",
     content: `
-glass_bounds(y):
+The Game class stores:
 
-Computes left and right boundary for each row.
+- wins → total successful games
+- losses → total failed games
+- category → selected category
+- secret → hidden word
+- correct → correctly guessed letters
+- missed → incorrect letters
+- logs → result messages
+- locked → game termination flag
 
-Logic:
-- Middle row defines the neck.
-- Spread increases as we move away from the center.
+GAME = Game()
 
-spread = (mid - y) // 2 if y < mid else (y - mid) // 2
-
-The glass narrows near the center and widens toward top and bottom.
-
-This dynamically creates a symmetric hourglass shape.
-
-Time Complexity:
-O(1) per row.
+The state persists across rounds, allowing cumulative score tracking.
 `
   },
 
   {
-    title: "Glass Containment Check",
+    title: "Word & Category Selection",
     content: `
-inside_glass(x, y):
+CATEGORIES is a dictionary mapping category names to word lists.
 
-Returns True if x is strictly between left and right bounds.
+Example:
+"Animals" → ["ANT", "BABOON", "BADGER", ...]
 
-This ensures:
-- Sand cannot pass through walls.
-- All movement respects hourglass geometry.
+During reset():
+
+If category not specified:
+    category = random.choice(list(CATEGORIES.keys()))
+
+Then:
+secret = random.choice(CATEGORIES[category])
 
 Time Complexity:
 O(1)
+
+This introduces variety and replayability.
 `
   },
 
   {
-    title: "Initial Grid Creation",
+    title: "Guess Submission Algorithm",
     content: `
-create_hourglass():
+submit_guess(letter):
 
-1) Initialize empty grid.
-2) Draw wall boundaries using glass_bounds.
-3) Fill upper half chamber with sand.
+1) If game locked → ignore.
+2) If letter already guessed → ignore.
+3) If letter in secret:
+      Add to correct list.
+      Check win condition.
+4) Else:
+      Add to missed list.
+      Check loss condition.
 
-Upper chamber fill:
-
-for y in range(3, HEIGHT // 2 - 1):
-    fill between left and right bounds.
+Membership check:
+if letter in GAME.secret
 
 Time Complexity:
-O(WIDTH × HEIGHT)
-
-This creates initial state for simulation.
+O(n)
+Where n = length of secret word.
 `
   },
 
   {
-    title: "Gravity Simulation Algorithm",
+    title: "Win Condition Logic",
     content: `
-step(grid):
+Win condition:
 
-Iterates from bottom to top:
+if all(c in GAME.correct for c in GAME.secret):
 
-for y in range(HEIGHT - 2, -1, -1):
+This ensures:
+Every unique letter in the word has been guessed.
 
-Why bottom-up?
-Prevents sand from moving twice in one step.
+When satisfied:
+- Log win message
+- Increment wins
+- Lock game
 
-For each sand particle:
-1) Try moving down.
-2) If blocked, try diagonal left-down.
-3) If blocked, try diagonal right-down.
-
-Movement allowed only if:
-- Target cell is EMPTY.
-- Target cell is inside glass.
-
-Time Complexity per frame:
-O(WIDTH × HEIGHT)
+Time Complexity:
+O(n)
 `
   },
 
   {
-    title: "Randomized Horizontal Order",
+    title: "Loss Condition & ASCII Progression",
     content: `
-Before processing each row:
+The game tracks incorrect guesses.
 
-xs = list(range(1, WIDTH - 1))
-random.shuffle(xs)
+Loss condition:
+if len(GAME.missed) >= len(HANGMAN_PICS) - 1:
 
-This prevents directional bias.
+HANGMAN_PICS contains progressive ASCII drawings.
+Each incorrect guess advances the visual stage.
 
-Without shuffle:
-Sand would consistently favor one diagonal side.
+Final stage:
+Full hangman drawn → Game Over.
 
-Randomization produces more natural flow.
-
-This introduces stochastic behavior.
+This models progressive visual state escalation.
 `
   },
 
   {
-    title: "Particle Movement Rules",
+    title: "Duplicate Guess Prevention",
     content: `
-Priority Order:
+Before processing:
 
-1) Vertical fall
-2) Diagonal left
-3) Diagonal right
+if letter in GAME.correct or letter in GAME.missed:
+    return
 
-Movement example:
+This prevents:
+- Duplicate penalties
+- Duplicate credit
 
-If grid[y+1][x] == EMPTY:
-    Move straight down.
-
-Else:
-    Check diagonals.
-
-This models simplified gravity with lateral flow.
-
-Similar to cellular automata sand simulation.
-`
-  },
-
-  {
-    title: "Termination Condition",
-    content: `
-step() returns:
-
-moved → Boolean
-
-If no particle moves:
-Simulation can stop.
-
-This prevents infinite looping once equilibrium is reached.
-
-Models physical rest state.
+Maintains integrity of attempt count.
 `
   },
 
   {
     title: "Algorithm Complexity Analysis",
     content: `
-Let:
-W = WIDTH
-H = HEIGHT
+Per guess:
 
-Grid creation → O(W × H)
-Each simulation step → O(W × H)
+Membership check → O(n)
+Win verification → O(n)
+State updates → O(1)
 
-Total runtime depends on:
-Number of steps until equilibrium.
-
-Worst case:
-O(k × W × H)
-Where k = number of frames.
+Overall per guess:
+O(n)
 
 Memory:
-O(W × H)
+O(k)
+Where k = number of guessed letters.
+
+Performance remains efficient for small word sizes.
 `
   },
 
@@ -194,29 +160,30 @@ O(W × H)
     content: `
 Concepts Demonstrated:
 
-- Procedural geometry generation
-- Cellular automata rules
-- Gravity simulation
-- Collision constraints
-- Randomized iteration for fairness
-- Discrete time-step simulation
-- Equilibrium detection
+- Random selection from categorized dataset
+- Membership testing in strings
+- Progressive state visualization
+- Win/loss threshold enforcement
+- Duplicate input prevention
+- Persistent scoring system
 
 Conceptual Pipeline:
 
-Generate Glass Shape
-        ↓
-Fill Upper Chamber
-        ↓
-Simulation Loop
-        ↓
-Apply Gravity Rules
-        ↓
-Move Sand Particles
-        ↓
-Repeat Until Stable
+Select Category
+      ↓
+Select Secret Word
+      ↓
+User Guesses Letter
+      ↓
+Check Membership
+      ↓
+Update Correct/Missed
+      ↓
+Check Win or Loss
+      ↓
+Lock Game
 
-The Hourglass module models particle-based physics using rule-based cellular updates within a procedurally generated constraint boundary.
+The Hangman module combines string processing, state management, and progressive visualization into a complete interactive game engine.
 `
   }
 ];
