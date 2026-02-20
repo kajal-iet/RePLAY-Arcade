@@ -1,59 +1,183 @@
 export const dicerollerDocs = [
   {
-    title: "Project Introduction",
+    title: "Problem Overview",
     content: `
-# Birthday Paradox Game
+The DiceRoller module interprets and executes dice notation strings such as:
 
-This game demonstrates a famous probability concept:
+"2d6"
+"4d8+3"
+"3d10-2"
 
-👉 In a group of people, how many are needed before two share the same birthday?
+Dice notation format:
+NdS ± M
 
-We turn this math concept into an interactive simulation.
+Where:
+N = number of dice
+S = number of sides per die
+M = optional modifier
 
-Tech Stack:
-- Backend: FastAPI
-- Frontend: React
-- Architecture: API-driven learning game
+Example:
+2d6+3 → Roll two 6-sided dice and add 3.
+
+This module demonstrates string parsing, dynamic token extraction, random number simulation, and arithmetic aggregation.
 `
   },
+
   {
-    title: "Concept: Birthday Paradox",
+    title: "Input Normalization & Parsing",
     content: `
-It sounds impossible, but it's true:
+The input string is cleaned:
 
-Only **23 people** are needed for a 50% chance of a match.
+clean = diceStr.lower().replace(" ", "")
 
-Why?
+This ensures:
+- Case insensitivity
+- Whitespace removal
 
-Because we compare every person with everyone else.
-Combinations grow FAST.
+If input == "quit":
+Return quit flag immediately.
 
-This game simulates that probability live.
+Next, locate the "d" separator:
+
+dIndex = clean.find("d")
+
+If missing:
+Raise exception → invalid dice format.
+
+This separates:
+Number of dice (before "d")
+Dice sides (after "d")
 `
   },
-  {
-    title: "Frontend Flow",
-    content: `
-User enters:
-- Number of people
-- Number of simulations
 
-Frontend sends request to backend.
-Backend generates random birthdays and checks matches.
-Result returned and displayed with stats + graph.
+  {
+    title: "Modifier Extraction Logic",
+    content: `
+The modifier (+ or -) is optional.
+
+modIndex = clean.find("+")
+if modIndex == -1:
+    modIndex = clean.find("-")
+
+If modifier exists:
+numSides = clean[dIndex+1 : modIndex]
+modAmount = clean[modIndex+1 :]
+
+If operator was "-":
+modAmount = -modAmount
+
+If no modifier:
+modAmount = 0
+
+This demonstrates conditional substring slicing and operator detection.
+
+All string slicing operations are O(n).
 `
   },
+
   {
-    title: "Learning Outcome",
+    title: "Dice Rolling Simulation",
     content: `
-You learn:
+Dice rolls are generated using:
 
-✔ Probability in real life  
-✔ How simulations work  
-✔ How frontend talks to backend  
-✔ How math becomes an application  
+rolls = [random.randint(1, numSides) for _ in range(numDice)]
 
-This is learning by building 🎯
+Each roll:
+Uniform probability distribution
+Range: 1 to numSides
+
+Time Complexity:
+O(numDice)
+
+Total calculation:
+total = sum(rolls) + modAmount
+
+Sum operation:
+O(numDice)
+
+This models realistic tabletop dice rolling mechanics.
+`
+  },
+
+  {
+    title: "Return Structure & Output Design",
+    content: `
+The function returns structured JSON-style data:
+
+{
+  "input": diceStr,
+  "rolls": rolls,
+  "total": total,
+  "modifier": modAmount
+}
+
+Example:
+
+Input:
+"2d6+3"
+
+Output:
+{
+  "rolls": [4, 2],
+  "modifier": 3,
+  "total": 9
+}
+
+This separates:
+- Raw rolls
+- Modifier
+- Final total
+`
+  },
+
+  {
+    title: "Algorithm Complexity Analysis",
+    content: `
+Let:
+n = length of input string
+k = number of dice
+
+Parsing → O(n)
+Dice generation → O(k)
+Summation → O(k)
+
+Total complexity:
+O(n + k)
+
+Since k is typically small, performance is efficient.
+
+Memory usage:
+O(k) for storing rolls.
+`
+  },
+
+  {
+    title: "Educational & Computational Insights",
+    content: `
+Concepts Demonstrated:
+
+- Domain-specific language (DSL) parsing
+- Token boundary detection
+- Conditional substring extraction
+- Uniform random sampling
+- Aggregate computation
+- Input validation
+
+Conceptual Pipeline:
+
+Raw String Input
+        ↓
+Normalize & Clean
+        ↓
+Extract Tokens (N, S, M)
+        ↓
+Simulate Random Rolls
+        ↓
+Compute Total
+        ↓
+Return Structured Result
+
+DiceRoller demonstrates how structured string parsing can power a miniature rule engine for probabilistic simulations.
 `
   }
 ];

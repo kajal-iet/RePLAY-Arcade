@@ -1,59 +1,224 @@
 export const fibonacciDocs = [
   {
-    title: "Project Introduction",
+    title: "Problem Overview",
     content: `
-# Birthday Paradox Game
+The Fibonacci module computes Fibonacci numbers using multiple algorithmic approaches.
 
-This game demonstrates a famous probability concept:
+Fibonacci sequence definition:
 
-👉 In a group of people, how many are needed before two share the same birthday?
+F(0) = 0
+F(1) = 1
+F(n) = F(n-1) + F(n-2)
 
-We turn this math concept into an interactive simulation.
+Sequence:
+0, 1, 1, 2, 3, 5, 8, 13, ...
 
-Tech Stack:
-- Backend: FastAPI
-- Frontend: React
-- Architecture: API-driven learning game
+This module demonstrates:
+- Recursive computation
+- Memoization
+- Iterative dynamic programming
+- Performance optimization
+- Sequence generation
+
+It highlights the contrast between exponential and linear time complexity.
 `
   },
+
   {
-    title: "Concept: Birthday Paradox",
+    title: "Recursive Implementation with Memoization",
     content: `
-It sounds impossible, but it's true:
+Implementation:
 
-Only **23 people** are needed for a 50% chance of a match.
+@lru_cache(maxsize=None)
+def fib_safe(n: int):
+    if n <= 1:
+        return n
+    return fib_safe(n - 1) + fib_safe(n - 2)
 
-Why?
+Without memoization:
+Time Complexity → O(2^n)
 
-Because we compare every person with everyone else.
-Combinations grow FAST.
+With lru_cache:
+Each value computed once.
+Time Complexity → O(n)
 
-This game simulates that probability live.
+The decorator stores previously computed values in a cache.
+This eliminates repeated subproblem computation.
+
+Space Complexity:
+O(n) for recursion stack + cache.
 `
   },
-  {
-    title: "Frontend Flow",
-    content: `
-User enters:
-- Number of people
-- Number of simulations
 
-Frontend sends request to backend.
-Backend generates random birthdays and checks matches.
-Result returned and displayed with stats + graph.
+  {
+    title: "Iterative Dynamic Programming (fib_fast)",
+    content: `
+Implementation:
+
+def fib_fast(n: int):
+    if n == 1:
+        return 0
+    if n == 2:
+        return 1
+
+    a, b = 0, 1
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    return b
+
+Logic:
+Only store last two values.
+Update them iteratively.
+
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(1)
+
+This is optimal for single-value computation.
 `
   },
+
   {
-    title: "Learning Outcome",
+    title: "Sequence Builder (Timeline Generation)",
     content: `
-You learn:
+build_timeline(n) generates entire sequence up to n.
 
-✔ Probability in real life  
-✔ How simulations work  
-✔ How frontend talks to backend  
-✔ How math becomes an application  
+def build_timeline(n: int):
+    seq = []
+    a, b = 0, 1
+    seq.append(a)
 
-This is learning by building 🎯
+    if n > 1:
+        seq.append(b)
+
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+        seq.append(b)
+
+    return seq
+
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(n)
+
+This is ideal for visualization or graphing.
+`
+  },
+
+  {
+    title: "Algorithm Complexity Comparison",
+    content: `
+Naive recursion:
+T(n) = T(n-1) + T(n-2)
+≈ O(2^n)
+
+Memoized recursion:
+O(n)
+
+Iterative DP:
+O(n)
+
+Space Comparison:
+
+Recursive (no memo):
+O(n) stack
+
+Memoized:
+O(n) cache + stack
+
+Iterative:
+O(1)
+
+This demonstrates dramatic performance improvement through dynamic programming.
+`
+  },
+
+  {
+    title: "Mathematical Insights",
+    content: `
+Fibonacci growth approximates:
+
+F(n) ≈ φ^n / √5
+
+Where:
+φ (Golden Ratio) ≈ 1.618
+
+Properties:
+- Exponential growth rate
+- Consecutive ratios converge to φ
+- Appears in natural patterns
+
+Example:
+F(10) = 55
+F(20) = 6765
+F(30) = 832040
+
+Numbers grow rapidly.
+`
+  },
+
+  {
+    title: "Backend API & Data Flow",
+    content: `
+Possible endpoints:
+
+POST /fibonacci/value
+Input:
+{
+  "n": 20,
+  "mode": "fast" | "safe"
+}
+
+POST /fibonacci/timeline
+Input:
+{
+  "n": 10
+}
+
+Output:
+{
+  "sequence": [0,1,1,2,3,5,8,13,21,34]
+}
+
+Pipeline:
+
+Input n
+      ↓
+Choose algorithm
+      ↓
+Compute value or sequence
+      ↓
+Return JSON
+`
+  },
+
+  {
+    title: "Educational & Computational Insights",
+    content: `
+Concepts Demonstrated:
+
+- Recursion vs iteration
+- Overlapping subproblems
+- Memoization
+- Dynamic programming
+- Time complexity optimization
+- Space-time tradeoffs
+
+Conceptual Pipeline:
+
+Input n
+      ↓
+Apply recurrence relation
+      ↓
+Store intermediate results
+      ↓
+Return final value
+
+The Fibonacci module is a foundational example for understanding dynamic programming and algorithmic optimization strategies.
 `
   }
 ];

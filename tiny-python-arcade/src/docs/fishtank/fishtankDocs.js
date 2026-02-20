@@ -1,59 +1,226 @@
 export const fishtankDocs = [
   {
-    title: "Project Introduction",
+    title: "Problem Overview",
     content: `
-# Birthday Paradox Game
+The Fishtank module simulates a dynamic underwater ecosystem inside a fixed grid.
 
-This game demonstrates a famous probability concept:
+Canvas:
+WIDTH = 70
+HEIGHT = 25
 
-👉 In a group of people, how many are needed before two share the same birthday?
+Entities:
+- Fish (horizontal swimmers)
+- Crabs (bottom walkers with animation frames)
+- Kelp (waving vertical plants)
+- Bubbles (rising particles)
+- Sand (static bottom layer)
 
-We turn this math concept into an interactive simulation.
+The simulation runs in discrete time steps (frames).
+Each frame updates entity positions and then renders the grid.
 
-Tech Stack:
-- Backend: FastAPI
-- Frontend: React
-- Architecture: API-driven learning game
+This module demonstrates multi-entity simulation, frame-based animation, collision handling, and layered ASCII rendering.
 `
   },
+
   {
-    title: "Concept: Birthday Paradox",
+    title: "Game State Architecture",
     content: `
-It sounds impossible, but it's true:
+The Tank class stores all simulation entities:
 
-Only **23 people** are needed for a 50% chance of a match.
+class Tank:
+    fishes
+    crabs
+    kelps
+    bubbles
+    bubblers
+    frame
 
-Why?
+GAME = Tank()
 
-Because we compare every person with everyone else.
-Combinations grow FAST.
+All objects are stored in lists of dictionaries.
+Each entity tracks its own position and behavior attributes.
 
-This game simulates that probability live.
+This models a centralized simulation state container.
 `
   },
-  {
-    title: "Frontend Flow",
-    content: `
-User enters:
-- Number of people
-- Number of simulations
 
-Frontend sends request to backend.
-Backend generates random birthdays and checks matches.
-Result returned and displayed with stats + graph.
+  {
+    title: "Entity Spawning Algorithms",
+    content: `
+Fish Spawner:
+- Random x and y position
+- Random shape
+- Random horizontal direction (-1 or +1)
+
+Crab Spawner:
+- Positioned near bottom
+- Has animation frame state
+- Random walking direction
+
+Kelp Spawner:
+- Random height (5–12)
+- Each segment randomly "(" or ")"
+
+Bubble generators (fixed x positions):
+[10, 30, 55]
+
+Spawning is randomized but constrained within bounds.
+
+Time Complexity:
+O(1) per entity creation.
 `
   },
+
   {
-    title: "Learning Outcome",
+    title: "Frame Update Simulation Logic",
     content: `
-You learn:
+update() performs one simulation step.
 
-✔ Probability in real life  
-✔ How simulations work  
-✔ How frontend talks to backend  
-✔ How math becomes an application  
+1) Fish Movement:
+   x += dir
+   Reverse direction at horizontal boundaries.
 
-This is learning by building 🎯
+2) Crab Movement:
+   Similar to fish.
+   Frame toggles:
+   frame = (frame + 1) % 2
+
+3) Kelp Waving:
+   Randomly flips segment "(" ↔ ")"
+   Introduces organic oscillation.
+
+4) Bubble Generation:
+   Random chance per bubbler.
+   Adds bubble at bottom.
+
+5) Bubble Rising:
+   y -= 1 each frame.
+   Remove bubbles when y <= 0.
+
+Each update cycle:
+O(total_entities)
+
+This models discrete-time simulation.
+`
+  },
+
+  {
+    title: "Boundary Collision Handling",
+    content: `
+Fish & Crabs bounce at horizontal edges:
+
+if x <= 0 or x >= WIDTH - object_size:
+    dir *= -1
+
+This simulates elastic collision against tank walls.
+
+Bubbles:
+Removed once they leave the top boundary.
+
+Boundary logic ensures no entity exceeds grid limits.
+`
+  },
+
+  {
+    title: "Layered Rendering Pipeline",
+    content: `
+Rendering builds a 2D grid:
+
+grid = [[" " for _ in range(WIDTH)] for _ in range(HEIGHT)]
+
+Render order:
+1) Kelp
+2) Bubbles
+3) Fish
+4) Crabs
+5) Sand
+
+Layer order matters:
+Later renders overwrite earlier ones.
+
+This models painter's algorithm rendering.
+
+Finally:
+"\n".join rows → ASCII frame output.
+`
+  },
+
+  {
+    title: "Animation Frames & Sprite Logic",
+    content: `
+Crabs use two-frame animation:
+
+CRAB_FRAMES = ["(\\_/)", "=(\\_/)"]
+
+Frame toggles every update:
+(frame + 1) % 2
+
+This creates walking animation effect.
+
+Fish shapes vary:
+FISH_TYPES = ["><>", "<><", ">||>", ...]
+
+Entities are rendered by iterating over characters in shape string.
+
+Time Complexity per render:
+O(WIDTH × HEIGHT + entity_count)
+`
+  },
+
+  {
+    title: "Algorithm Complexity Analysis",
+    content: `
+Let:
+F = number of fish
+C = number of crabs
+K = number of kelps
+B = number of bubbles
+
+Update complexity:
+O(F + C + K + B)
+
+Render complexity:
+O(WIDTH × HEIGHT + entity_count)
+
+Since WIDTH and HEIGHT are fixed,
+complexity mainly depends on entity counts.
+
+Memory:
+O(entity_count)
+`
+  },
+
+  {
+    title: "Educational & Computational Insights",
+    content: `
+Concepts Demonstrated:
+
+- Discrete-time simulation
+- Multi-entity state management
+- Directional motion
+- Boundary collision detection
+- Particle systems (bubbles)
+- Frame-based animation
+- Layered rendering
+- Procedural environment generation
+
+Conceptual Pipeline:
+
+Spawn Entities
+       ↓
+Frame Update Loop
+       ↓
+Position Updates
+       ↓
+Boundary Handling
+       ↓
+Animation Frame Toggle
+       ↓
+Grid Rendering
+       ↓
+ASCII Output
+
+The Fishtank module functions as a lightweight animation engine using ASCII rendering and time-stepped state evolution.
 `
   }
 ];

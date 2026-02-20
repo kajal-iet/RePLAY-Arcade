@@ -1,59 +1,210 @@
 export const hackingDocs = [
   {
-    title: "Project Introduction",
+    title: "Problem Overview",
     content: `
-# Birthday Paradox Game
+The Hacking module simulates a password cracking mini-game inspired by classic terminal hacking interfaces.
 
-This game demonstrates a famous probability concept:
+The player is presented with a list of candidate words.
+One word is secretly selected as the correct password.
 
-👉 In a group of people, how many are needed before two share the same birthday?
+The player has limited attempts to guess correctly.
 
-We turn this math concept into an interactive simulation.
+For each guess:
+- The system reports how many letters match in the correct position.
+- A heat indicator (Cold/Warm/Hot) is displayed.
+- The system locks after a fixed number of failed attempts.
 
-Tech Stack:
-- Backend: FastAPI
-- Frontend: React
-- Architecture: API-driven learning game
+This module demonstrates constrained search, positional matching algorithms, and feedback-based elimination strategies.
 `
   },
+
   {
-    title: "Concept: Birthday Paradox",
+    title: "Game State Architecture",
     content: `
-It sounds impossible, but it's true:
+The Game class stores:
 
-Only **23 people** are needed for a 50% chance of a match.
+- words → 12 randomly selected candidates
+- secret → hidden correct password
+- tries → attempt counter
+- logs → history of system messages
+- locked → whether system is locked
 
-Why?
+GAME = Game()
 
-Because we compare every person with everyone else.
-Combinations grow FAST.
-
-This game simulates that probability live.
+State ensures:
+- Only valid words are accepted
+- Attempts are limited
+- Lock state prevents further guessing
 `
   },
-  {
-    title: "Frontend Flow",
-    content: `
-User enters:
-- Number of people
-- Number of simulations
 
-Frontend sends request to backend.
-Backend generates random birthdays and checks matches.
-Result returned and displayed with stats + graph.
+  {
+    title: "Password Matching Algorithm",
+    content: `
+Function:
+
+def matching_letters(a, b):
+    return sum(1 for i in range(len(a)) if a[i] == b[i])
+
+Logic:
+Compare characters position-by-position.
+Count exact positional matches.
+
+Example:
+
+Secret: NETWORK
+Guess:  NETWORM
+
+Matches:
+N==N ✓
+E==E ✓
+T==T ✓
+W==W ✓
+O==O ✓
+R==R ✓
+K!=M ✗
+
+Result: 6 matches
+
+Time Complexity:
+O(n)
+Where n = word length (7 here)
 `
   },
+
   {
-    title: "Learning Outcome",
+    title: "Heat Classification Logic",
     content: `
-You learn:
+Heat label is derived from number of matches:
 
-✔ Probability in real life  
-✔ How simulations work  
-✔ How frontend talks to backend  
-✔ How math becomes an application  
+0–1 matches → 🧊 Cold
+2–4 matches → 🌡 Warm
+5–7 matches → 🔥 Hot
 
-This is learning by building 🎯
+Function:
+
+def heat_label(matches):
+    if matches <= 1: return "Cold"
+    if matches <= 4: return "Warm"
+    return "Hot"
+
+This creates qualitative feedback from quantitative data.
+
+Time Complexity:
+O(1)
+`
+  },
+
+  {
+    title: "Guess Submission Flow",
+    content: `
+submit_guess(guess):
+
+1) If locked → ignore.
+2) Validate guess is in candidate list.
+3) Increment tries.
+4) Calculate positional matches.
+5) Log feedback message.
+6) If correct → grant access.
+7) If attempts exhausted → system lock.
+
+Invalid guesses:
+Logged as:
+"INVALID INPUT — NOT IN MEMORY"
+
+Correct guess:
+"A C C E S S   G R A N T E D"
+
+Failure after max attempts:
+"SYSTEM LOCKED — PASSWORD WAS X"
+`
+  },
+
+  {
+    title: "Limited Attempts & Lock Logic",
+    content: `
+MAX_TRIES = 4
+
+If tries >= MAX_TRIES and password not found:
+System locks.
+No further guesses accepted.
+
+This models:
+- Security lockout mechanisms
+- Finite attempt constraint
+
+Prevents brute force beyond limit.
+`
+  },
+
+  {
+    title: "Search Strategy Insight",
+    content: `
+Optimal player strategy:
+
+Use elimination logic.
+
+Example:
+If guess returns 3/7 matches,
+eliminate all words with different positional similarity.
+
+This narrows candidate space.
+
+Worst-case brute force:
+O(k)
+Where k = number of candidate words (12)
+
+Optimal narrowing reduces search quickly.
+`
+  },
+
+  {
+    title: "Algorithm Complexity Analysis",
+    content: `
+Per guess:
+Validation → O(k)
+Matching → O(n)
+Heat classification → O(1)
+
+Total per guess:
+O(k + n)
+
+Since k and n are small,
+performance is efficient.
+
+Memory:
+O(k) for word list
+O(attempts) for logs
+`
+  },
+
+  {
+    title: "Educational & Computational Insights",
+    content: `
+Concepts Demonstrated:
+
+- Positional comparison algorithms
+- Feedback-based search narrowing
+- Input validation
+- Lock-state enforcement
+- Attempt limitation
+- Game-state management
+
+Conceptual Pipeline:
+
+Select Secret
+      ↓
+User Guess
+      ↓
+Validate Input
+      ↓
+Count Positional Matches
+      ↓
+Generate Heat Feedback
+      ↓
+Check Win or Lock
+
+The Hacking module models constrained password cracking logic and strategic elimination through positional similarity analysis.
 `
   }
 ];

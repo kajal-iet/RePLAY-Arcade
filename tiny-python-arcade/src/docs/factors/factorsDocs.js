@@ -1,59 +1,214 @@
 export const factorsDocs = [
   {
-    title: "Project Introduction",
+    title: "Problem Overview",
     content: `
-# Birthday Paradox Game
+The Factors module computes all positive factors of a given integer n and determines whether the number is prime.
 
-This game demonstrates a famous probability concept:
+A factor of n is any integer i such that:
+n % i == 0
 
-👉 In a group of people, how many are needed before two share the same birthday?
+For example:
+Factors of 12 → [1, 2, 3, 4, 6, 12]
 
-We turn this math concept into an interactive simulation.
+Additionally:
+A number is prime if it has exactly two factors:
+1 and itself.
 
-Tech Stack:
-- Backend: FastAPI
-- Frontend: React
-- Architecture: API-driven learning game
+This module demonstrates divisor search optimization using square root bounding, divisor pairing, and primality detection.
 `
   },
-  {
-    title: "Concept: Birthday Paradox",
-    content: `
-It sounds impossible, but it's true:
 
-Only **23 people** are needed for a 50% chance of a match.
+  {
+    title: "Square Root Optimization",
+    content: `
+Naive approach:
+Check all integers from 1 to n → O(n)
+
+Optimized approach:
+Only check up to √n.
 
 Why?
 
-Because we compare every person with everyone else.
-Combinations grow FAST.
+If i is a factor of n:
+Then n / i is also a factor.
 
-This game simulates that probability live.
+Example:
+n = 36
+
+If 3 divides 36,
+Then 12 also divides 36.
+
+So factors occur in pairs:
+(i, n/i)
+
+Thus, we only need to iterate:
+
+for i in range(1, int(math.sqrt(n)) + 1)
+
+This reduces time complexity to O(√n).
 `
   },
-  {
-    title: "Frontend Flow",
-    content: `
-User enters:
-- Number of people
-- Number of simulations
 
-Frontend sends request to backend.
-Backend generates random birthdays and checks matches.
-Result returned and displayed with stats + graph.
+  {
+    title: "Factor Pairing Algorithm",
+    content: `
+Implementation:
+
+def find_factors(n: int):
+    factors = []
+    for i in range(1, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            factors.append(i)
+
+            if i != n // i:
+                factors.append(n // i)
+
+Logic Explanation:
+
+If i divides n:
+Add i.
+Add complementary factor n//i.
+Avoid duplicates when i == n//i
+(e.g., perfect squares like 16 → 4 × 4)
+
+This ensures all factors are collected.
 `
   },
+
   {
-    title: "Learning Outcome",
+    title: "Sorting & Prime Detection",
     content: `
-You learn:
+After collecting factors:
 
-✔ Probability in real life  
-✔ How simulations work  
-✔ How frontend talks to backend  
-✔ How math becomes an application  
+factors.sort()
 
-This is learning by building 🎯
+Sorting ensures ascending order.
+
+Prime detection:
+
+"is_prime": len(factors) == 2
+
+Why 2?
+
+Prime numbers have only:
+1 and itself.
+
+Example:
+7 → [1, 7] → Prime
+12 → [1, 2, 3, 4, 6, 12] → Not Prime
+`
+  },
+
+  {
+    title: "Algorithm Complexity Analysis",
+    content: `
+Let n be the input number.
+
+Loop runs until √n:
+O(√n)
+
+Factor append operations:
+O(√n)
+
+Sorting:
+Worst-case O(k log k)
+Where k ≈ number of factors
+k ≤ 2√n
+
+Overall Complexity:
+O(√n)
+
+Space Complexity:
+O(k)
+`
+  },
+
+  {
+    title: "Mathematical Insights",
+    content: `
+Properties:
+
+- Every composite number has at least one factor ≤ √n.
+- Perfect squares have odd number of factors.
+- Prime numbers have exactly 2 factors.
+
+Example:
+
+n = 16
+Factors:
+1, 2, 4, 8, 16
+(5 factors → odd count)
+
+n = 13
+Factors:
+1, 13
+(2 factors → prime)
+
+This module bridges computational logic with number theory principles.
+`
+  },
+
+  {
+    title: "Backend API & Data Flow",
+    content: `
+Endpoint:
+POST /factors/find
+
+Input:
+{
+  "number": 36
+}
+
+Output:
+{
+  "number": 36,
+  "factors": [1,2,3,4,6,9,12,18,36],
+  "is_prime": false
+}
+
+Pipeline:
+
+Input n
+      ↓
+Iterate up to √n
+      ↓
+Collect factor pairs
+      ↓
+Sort list
+      ↓
+Determine primality
+      ↓
+Return structured JSON
+`
+  },
+
+  {
+    title: "Educational & Computational Insights",
+    content: `
+Concepts Demonstrated:
+
+- Divisor search optimization
+- Mathematical pairing symmetry
+- Square root boundary reasoning
+- Conditional branching
+- Sorting algorithm application
+- Prime classification
+
+Conceptual Pipeline:
+
+Input Number
+      ↓
+Iterate to √n
+      ↓
+Identify Divisors
+      ↓
+Pair Complement Factors
+      ↓
+Sort Results
+      ↓
+Determine Prime Status
+
+The Factors module is a strong example of applying mathematical reasoning to reduce computational complexity efficiently.
 `
   }
 ];

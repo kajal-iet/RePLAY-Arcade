@@ -10,17 +10,14 @@ Bagels → No correct digits
 
 The goal of the game is to deduce the hidden number using logical reasoning based on these clues.
 This implementation is built as a server-driven game module using Python and FastAPI. The backend handles secret generation, guess validation, clue calculation, and state management.
-
 Let:
 S = Secret number (n-digit string)
 G = Player guess (n-digit string)
 n = Number of digits
 
 Digits are unique (optional constraint depending on difficulty)
-
 Input:
 Player submits guess G.
-
 Output:
 System returns:
 
@@ -31,9 +28,7 @@ Game status (win/continue/lose)
   },
   {
     title: "Secret Number Generation Algorithm",
-    content: `
-Objective:
-
+    content: `Objective:
 Generate an n-digit number where:
 
 Digits are unique
@@ -41,7 +36,6 @@ First digit is not zero
 Random distribution
 
 Step-by-step logic:
-
 Create a list of digits 0–9
 Shuffle the list
 Ensure first digit ≠ 0
@@ -50,7 +44,6 @@ Join into string
 
 Example Implementation:
 import random
-
 def generate_secret(n=3):
     digits = list("0123456789")
     random.shuffle(digits)
@@ -62,67 +55,51 @@ def generate_secret(n=3):
                 break
 
     return "".join(digits[:n])
+`
+  },
 
-
-
-#    "Clue Generation Algorithm (Core Logic)"
-This is the heart of the game.
+{
+    title: "Clue Generation Algorithm (Core Logic)",
+    content: `This is the heart of the game.
 
 We compare guess G to secret S.
-
 Logic:
-
 For each index i:
-
 If G[i] == S[i] → Fermi
-
 Else if G[i] in S → Pico
-
 If no matches → Bagels
 
 Step-by-step breakdown:
-
 Let:
-
 S = 427
 G = 472
 
-
 Comparison:
-
 Position	Secret	Guess	Result
 0	4	4	Fermi
 1	2	7	Pico
 2	7	2	Pico
 
 Output:
-
 ["Fermi", "Pico", "Pico"]
-
-
 Sorted alphabetically (optional standardization).
 
 Implementation:
 def evaluate_guess(secret, guess):
     clues = []
-
     for i in range(len(guess)):
         if guess[i] == secret[i]:
             clues.append("Fermi")
         elif guess[i] in secret:
             clues.append("Pico")
-
     if not clues:
         return ["Bagels"]
-
     return sorted(clues)
 `
-  },
+},
 {
     title: "Algorithm Complexity Analysis",
-    content: `
-    Secret Generation:
-
+    content: `Secret Generation:
 Shuffle: O(10)
 Selection: O(n)
 Overall: O(n)
@@ -133,9 +110,11 @@ Membership check in secret (O(n))
 
 Worst case: O(n²)
 For n=3 or n=4 → negligible.
-
-#      State Management in Backend
-Since this is API-based, the server must maintain:
+`
+},
+{
+  title: "State Management in Backend",
+    content: `Since this is API-based, the server must maintain:
 Secret number
 Attempt count
 Difficulty level
@@ -150,15 +129,11 @@ Database	Persistent storage	Not used
 In this implementation, state is maintained in memory, meaning:
 
 Restarting server resets games
-Suitable for lightweight deployment
-`
+Suitable for lightweight deployment`
 },
 {
   title: "API Design",
-    content: `
-
-Two main endpoints:
-
+    content: `Two main endpoints:
 Start Game
 POST /bagels/start
 Input:
@@ -199,5 +174,10 @@ def validate_guess(guess, n):
 
 `
 },
+{
+  title: "Conceptual Layers",
+  content: `
+`
+}
 
 ];
