@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/fastdraw";
+const BASE = `${import.meta.env.VITE_API_URL}/fastdraw`;
 
 export async function startRound() {
   const res = await fetch(`${BASE}/start`, { method: "POST" });

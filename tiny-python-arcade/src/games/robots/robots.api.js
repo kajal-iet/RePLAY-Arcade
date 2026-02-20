@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/robots";
+const BASE = `${import.meta.env.VITE_API_URL}/robots`;
 
 export async function getState() {
   return fetch(`${BASE}/state`).then(r => r.json());

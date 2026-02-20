@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/fishtank";
+const BASE = `${import.meta.env.VITE_API_URL}`;
 
 export async function getFrame() {
   const res = await fetch(`${BASE}/frame`);

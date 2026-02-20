@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/ducklings";
+const BASE = `${import.meta.env.VITE_API_URL}/ducklings`;
 
 export async function getDucks(count, seasonal) {
   const res = await fetch(`${BASE}/generate`, {

@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/matrix";
+const BASE = `${import.meta.env.VITE_API_URL}/matrix`;
 
 export async function setMatrixMode(mode) {
   const res = await fetch(`${BASE}/config`, {

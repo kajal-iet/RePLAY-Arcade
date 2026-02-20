@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/guessnumber";
+const BASE = `${import.meta.env.VITE_API_URL}/guessnumber`;
 
 export async function getState() {
   const res = await fetch(`${BASE}/state`);

@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/connect4";
+const BASE = `${import.meta.env.VITE_API_URL}/connect4`;
 
 export async function getState() {
   const res = await fetch(`${BASE}/state`);

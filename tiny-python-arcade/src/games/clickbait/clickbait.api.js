@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/clickbait";
+const BASE = `${import.meta.env.VITE_API_URL}/clickbait`;
 
 export async function generateHeadlines(payload) {
   const res = await fetch(`${BASE}/generate`, {

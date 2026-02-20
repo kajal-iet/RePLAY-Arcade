@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/etching";
+const BASE = `${import.meta.env.VITE_API_URL}/etching`;
 
 export async function drawCanvas(moves){
   const res = await fetch(`${BASE}/draw`,{

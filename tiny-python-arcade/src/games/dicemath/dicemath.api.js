@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/dicemath";
+const BASE = `${import.meta.env.VITE_API_URL}/dicemath`;
 
 export async function getQuestion(min_dice, max_dice) {
   const res = await fetch(`${BASE}/question`, {

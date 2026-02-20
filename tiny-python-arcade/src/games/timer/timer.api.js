@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/timer";
+const BASE = `${import.meta.env.VITE_API_URL}/timer`;
 
 export async function startTimer(payload) {
   const res = await fetch(`${BASE}/start`, {

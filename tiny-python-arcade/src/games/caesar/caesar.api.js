@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/caesar";
+const BASE = `${import.meta.env.VITE_API_URL}/caesar`;
 
 export async function translate(payload) {
   const res = await fetch(`${BASE}/translate`, {

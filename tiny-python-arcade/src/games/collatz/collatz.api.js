@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/collatz";
+const BASE = `${import.meta.env.VITE_API_URL}/collatz`;
 
 export async function getSingle(n) {
   const res = await fetch(`${BASE}/single`, {

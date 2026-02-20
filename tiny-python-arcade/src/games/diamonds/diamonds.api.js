@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/diamonds";
+const BASE = `${import.meta.env.VITE_API_URL}/diamonds`;
 
 export async function generateDiamond(payload) {
   const res = await fetch(`${BASE}/generate`, {

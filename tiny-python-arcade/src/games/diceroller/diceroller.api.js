@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/diceroller";
+const BASE = `${import.meta.env.VITE_API_URL}/diceroller`;
 
 export async function rollDice(expression) {
   const res = await fetch(`${BASE}/roll`, {

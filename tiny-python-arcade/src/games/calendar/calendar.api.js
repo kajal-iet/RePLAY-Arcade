@@ -1,5 +1,5 @@
 export async function loadCalendar(year, month) {
-  const res = await fetch("http://localhost:8000/calendar/get", {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/calendar/get`, {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify({year, month})
@@ -8,7 +8,7 @@ export async function loadCalendar(year, month) {
 }
 
 export async function saveNote(date, text) {
-  await fetch("http://localhost:8000/calendar/save-note", {
+  await fetch(`${import.meta.env.VITE_API_URL}/calendar/save-note`, {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify({date, text})
