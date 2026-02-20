@@ -4,7 +4,7 @@ export async function getState() {
   return fetch(`${BASE}/state`).then(r => r.json());
 }
 
-export async function movePlayer(move) {
+export async function move(move) {
   await fetch(`${BASE}/move`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -12,14 +12,14 @@ export async function movePlayer(move) {
   });
 }
 
-export async function teleportPlayer() {
+export async function teleport() {
   await fetch(`${BASE}/teleport`, {
     method: "POST"
   });
 }
 
 // ⭐ RESET GAME
-export async function resetGame() {
+export async function reset() {
   await fetch(`${BASE}/reset`, {
     method: "POST"
   });

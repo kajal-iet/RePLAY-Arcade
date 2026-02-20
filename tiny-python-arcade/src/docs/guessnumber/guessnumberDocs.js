@@ -1,4 +1,4 @@
-export const guessNumberDocs = [
+export const guessnumberDocs = [
   {
     title: "Problem Overview",
     content: `
