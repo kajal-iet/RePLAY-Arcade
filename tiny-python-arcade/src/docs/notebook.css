@@ -54,7 +54,8 @@
   border: 1px solid rgba(255,255,255,.04);
   animation: fadeIn .25s ease;
   color:rgb(241, 245, 245);
-  height: 80vh;
+  max-height: 80vh;
+  overflow-y: auto;
   
   
 }
